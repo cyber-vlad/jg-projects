@@ -46,7 +46,6 @@
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Subscriber.cs" />
     <Compile Include="Entities\Subscription.cs" />
-    <Compile Include="Entities\Topic.cs" />
     <Compile Include="Interfaces\IPublisher.cs" />
     <Compile Include="Interfaces\ISubscriber.cs" />
     <Compile Include="Interfaces\ISubscriptionRepository.cs" />
