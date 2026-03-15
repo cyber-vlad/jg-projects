@@ -5,6 +5,7 @@ using MessageBroker.Common.Models;
 using System;
 using System.Messaging;
 using System.ServiceModel;
+using Message = MessageBroker.Common.Entities.Message;
 
 namespace MessageBroker.Client
 {
@@ -52,11 +53,12 @@ namespace MessageBroker.Client
 
             queue.ReceiveCompleted += (sender, e) =>
             {
+                var q = (MessageQueue)sender;
+                q.BeginReceive();
                 try
                 {
-                    var msmqMessage = queue.EndReceive(e.AsyncResult);
-                    var message = (Common.Entities.Message)msmqMessage.Body;
-
+                    var msg = q.EndReceive(e.AsyncResult);
+                    var message = (Message)msg.Body;
                     Console.WriteLine($"[Listening]: {message.Topic} | {message.Content}");
                 }
                 catch (Exception ex)
