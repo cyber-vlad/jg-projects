@@ -1,4 +1,5 @@
-﻿using MessageBroker.Common.Entities;
+﻿using MessageBroker.Common.Consts;
+using MessageBroker.Common.Entities;
 using MessageBroker.Common.Interfaces;
 using System;
 using System.ServiceModel;
@@ -12,7 +13,7 @@ namespace MessageBroker.Client
         public PublisherClient()
         {
             var binding = new WSHttpBinding();
-            var endpoint = new EndpointAddress("http://localhost:7001/publisher/PublisherService");
+            var endpoint = new EndpointAddress(BrokerConfig.PublisherBaseUrl + BrokerConfig.PublisherServiceName);
 
             var channelFactory = new ChannelFactory<IPublisher>(binding, endpoint);
             _proxy = channelFactory.CreateChannel();

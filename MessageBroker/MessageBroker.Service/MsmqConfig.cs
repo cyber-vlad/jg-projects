@@ -1,6 +1,6 @@
 ﻿namespace MessageBroker.Service
 {
-    public static class BrokerConfig
+    public static class MsmqConfig
     {
         public const string MsmqBasePath = @".\private$\";
     }

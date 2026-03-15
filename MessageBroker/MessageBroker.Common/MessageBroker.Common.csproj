@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consts\BrokerConfig.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Subscriber.cs" />
     <Compile Include="Entities\Subscription.cs" />

@@ -1,4 +1,5 @@
-﻿using MessageBroker.Common.Interfaces;
+﻿using MessageBroker.Common.Consts;
+using MessageBroker.Common.Interfaces;
 using MessageBroker.Service.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -34,10 +35,10 @@ namespace MessageBroker.Host
         private void StartPublisher()
         {
             var service = _serviceProvider.GetRequiredService<PublisherService>();
-            Uri baseAddress = new Uri("http://localhost:7001/publisher/");
-          
+            Uri baseAddress = new Uri(BrokerConfig.PublisherBaseUrl);
+
             _publisherHost = new ServiceHost(service, baseAddress);
-            _publisherHost.AddServiceEndpoint(typeof(IPublisher), new WSHttpBinding(), "PublisherService");
+            _publisherHost.AddServiceEndpoint(typeof(IPublisher), new WSHttpBinding(), BrokerConfig.PublisherServiceName);
 
             var smb = new ServiceMetadataBehavior()
             {
@@ -53,10 +54,10 @@ namespace MessageBroker.Host
         private void StartSubscriber()
         {
             var service = _serviceProvider.GetRequiredService<SubscriberService>();
-            Uri baseAddress = new Uri("http://localhost:7002/subscriber/");
+            Uri baseAddress = new Uri(BrokerConfig.SubscriberBaseUrl);
 
             _subscriberHost = new ServiceHost(service, baseAddress);
-            _subscriberHost.AddServiceEndpoint(typeof(ISubscriber), new WSHttpBinding(), "SubscriberService");
+            _subscriberHost.AddServiceEndpoint(typeof(ISubscriber), new WSHttpBinding(), BrokerConfig.SubscriberServiceName);
 
             var smb = new ServiceMetadataBehavior()
             {

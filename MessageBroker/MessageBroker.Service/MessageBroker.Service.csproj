@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrokerConfig.cs" />
+    <Compile Include="MsmqConfig.cs" />
     <Compile Include="Infrastructure\MsmqProvider.cs" />
     <Compile Include="Repositories\SubscriptionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

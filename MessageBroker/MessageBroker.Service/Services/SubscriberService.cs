@@ -29,7 +29,7 @@ namespace MessageBroker.Service.Services
                 };
             }
 
-            var queuePath = $@"{BrokerConfig.MsmqBasePath}{topic}_{subscriber.Id}";
+            var queuePath = $@"{MsmqConfig.MsmqBasePath}{topic}_{subscriber.Id}";
 
             var subscription = new Subscription
             {

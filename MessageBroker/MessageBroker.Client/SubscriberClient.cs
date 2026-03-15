@@ -1,4 +1,5 @@
-﻿using MessageBroker.Common.Entities;
+﻿using MessageBroker.Common.Consts;
+using MessageBroker.Common.Entities;
 using MessageBroker.Common.Interfaces;
 using MessageBroker.Common.Models;
 using System;
@@ -17,7 +18,7 @@ namespace MessageBroker.Client
             _subscriber = subscriber;
 
             var binding = new WSHttpBinding();
-            var endpoint = new EndpointAddress("http://localhost:7002/subscriber/SubscriberService");
+            var endpoint = new EndpointAddress(BrokerConfig.SubscriberBaseUrl + BrokerConfig.SubscriberServiceName);
 
             var channelFactory = new ChannelFactory<ISubscriber>(binding, endpoint);
             _proxy = channelFactory.CreateChannel();
