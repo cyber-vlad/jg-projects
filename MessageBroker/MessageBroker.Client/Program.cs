@@ -1,6 +1,10 @@
-﻿using MessageBroker.Common.Entities;
+﻿using MessageBroker.Client.ServiceReference1;
+using MessageBroker.Client.ServiceReference2;
+using MessageBroker.Common.Entities;
 using System;
+using System.Messaging;
 using System.Threading.Tasks;
+using Message = MessageBroker.Common.Entities.Message;
 
 namespace MessageBroker.Client
 {
@@ -12,32 +16,12 @@ namespace MessageBroker.Client
             string type = Console.ReadLine();
             Console.Clear();
 
-            if(type == "s")
+            switch(type)
             {
-                RunSubscriber();
+                case "p": RunPublisher(); break;
+                case "s": RunSubscriber(); break;
+                default: Console.WriteLine("Bye"); break;  
             }
-            else if(type == "p")
-            {
-                RunPublisher();
-            }
-        }
-
-        private static void RunSubscriber()
-        {
-            Console.WriteLine(">> Enter ID: ");
-            int subscriberId = int.Parse(Console.ReadLine());
-
-            var subscriberInfo = new Subscriber { Id = subscriberId };
-            var subscriber = new SubscriberClient(subscriberInfo);
-            
-            Console.WriteLine(">> Enter topic: ");
-            var topic = Console.ReadLine();
-
-            var response = subscriber.Subscribe(topic);
-
-            Task.Run(() => subscriber.ListenMessages(response.QueuePath));
-
-            Console.ReadLine();
         }
 
         private static void RunPublisher()
@@ -58,8 +42,60 @@ namespace MessageBroker.Client
                     Content = content
                 };
 
-                publisher.PublishMessage(message);
+                publisher.Publish(message);
             }
+        }
+
+        private static void RunSubscriber()
+        {
+            Console.WriteLine(">> Enter ID: ");
+            int subscriberId = int.Parse(Console.ReadLine());
+
+            var subscriberInfo = new Subscriber { Id = subscriberId };
+            var subscriber = new SubscriberClient();
+
+            Console.WriteLine(">> Enter topic: ");
+            var topic = Console.ReadLine();
+
+            var response = subscriber.Subscribe(subscriberInfo, topic);
+
+            Task.Run(() => ListenMessages(response.QueuePath));
+
+            Console.ReadLine();
+        }
+
+        private static void ListenMessages(string queuePath)
+        {
+            if (!MessageQueue.Exists(queuePath))
+            {
+                Console.WriteLine("[Error] Queue does not exist");
+                return;
+            }
+
+            var queue = new MessageQueue(queuePath);
+            queue.Formatter = new BinaryMessageFormatter();
+
+            queue.ReceiveCompleted += (sender, e) =>
+            {
+                var q = (MessageQueue)sender;
+                q.BeginReceive();
+                try
+                {
+                    var msg = q.EndReceive(e.AsyncResult);
+                    var message = (Message)msg.Body;
+                    Console.WriteLine($"[Listening]: {message.Topic} | {message.Content}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[Error][Listening] : {ex.Message}");
+                }
+                finally
+                {
+                    queue.BeginReceive();
+                }
+            };
+
+            queue.BeginReceive();
         }
     }
 }
