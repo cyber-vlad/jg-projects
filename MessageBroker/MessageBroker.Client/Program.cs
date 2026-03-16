@@ -8,29 +8,58 @@ namespace MessageBroker.Client
     {
         static void Main(string[] args)
         {
-            var subscriberInfo = new Subscriber
+            Console.WriteLine(">> Enter type (publisher [p] / subscriber [s])");
+            string type = Console.ReadLine();
+            Console.Clear();
+
+            if(type == "s")
             {
-                Id = 1,
-            };
+                RunSubscriber();
+            }
+            else if(type == "p")
+            {
+                RunPublisher();
+            }
+        }
 
-            var publisher = new PublisherClient();
+        private static void RunSubscriber()
+        {
+            Console.WriteLine(">> Enter ID: ");
+            int subscriberId = int.Parse(Console.ReadLine());
+
+            var subscriberInfo = new Subscriber { Id = subscriberId };
             var subscriber = new SubscriberClient(subscriberInfo);
-
-            var topic = "wcf";
+            
+            Console.WriteLine(">> Enter topic: ");
+            var topic = Console.ReadLine();
 
             var response = subscriber.Subscribe(topic);
 
             Task.Run(() => subscriber.ListenMessages(response.QueuePath));
 
-            var message = new Message
-            {
-                Topic = topic,
-                Content = "Using WCF + MSMQ"
-            };
-
-            publisher.PublishMessage(message);
-
             Console.ReadLine();
+        }
+
+        private static void RunPublisher()
+        {
+            Console.WriteLine(">> Enter topic: ");
+            var topic = Console.ReadLine();
+
+            var publisher = new PublisherClient();
+
+            while (true)
+            {
+                Console.WriteLine(">> Enter message: ");
+                var content = Console.ReadLine();
+                
+                var message = new Message
+                {
+                    Topic = topic,
+                    Content = content
+                };
+
+                publisher.PublishMessage(message);
+            }
         }
     }
 }

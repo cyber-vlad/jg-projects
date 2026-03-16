@@ -2,6 +2,7 @@
 using MessageBroker.Common.Interfaces;
 using MessageBroker.Common.Models;
 using System;
+using System.Messaging;
 using System.ServiceModel;
 
 namespace MessageBroker.Service.Services
@@ -30,6 +31,11 @@ namespace MessageBroker.Service.Services
             }
 
             var queuePath = $@"{MsmqConfig.MsmqBasePath}{topic}_{subscriber.Id}";
+
+            if (!MessageQueue.Exists(queuePath))
+            {
+                MessageQueue.Create(queuePath, false);
+            }
 
             var subscription = new Subscription
             {
