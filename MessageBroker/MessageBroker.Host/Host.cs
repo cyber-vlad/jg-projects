@@ -35,17 +35,9 @@ namespace MessageBroker.Host
         private void StartPublisher()
         {
             var service = _serviceProvider.GetRequiredService<PublisherService>();
-            Uri baseAddress = new Uri(BrokerConfig.PublisherBaseUrl);
 
-            _publisherHost = new ServiceHost(service, baseAddress);
-            _publisherHost.AddServiceEndpoint(typeof(IPublisher), new WSHttpBinding(), BrokerConfig.PublisherServiceName);
+            _publisherHost = new ServiceHost(service);
 
-            var smb = new ServiceMetadataBehavior()
-            {
-                HttpGetEnabled = true
-            };
-
-            _publisherHost.Description.Behaviors.Add(smb);
             _publisherHost.Open();
 
             Console.WriteLine("[Publisher] Running");
@@ -54,17 +46,9 @@ namespace MessageBroker.Host
         private void StartSubscriber()
         {
             var service = _serviceProvider.GetRequiredService<SubscriberService>();
-            Uri baseAddress = new Uri(BrokerConfig.SubscriberBaseUrl);
 
-            _subscriberHost = new ServiceHost(service, baseAddress);
-            _subscriberHost.AddServiceEndpoint(typeof(ISubscriber), new WSHttpBinding(), BrokerConfig.SubscriberServiceName);
+            _subscriberHost = new ServiceHost(service);
 
-            var smb = new ServiceMetadataBehavior()
-            {
-                HttpGetEnabled = true
-            };
-
-            _subscriberHost.Description.Behaviors.Add(smb);
             _subscriberHost.Open();
 
             Console.WriteLine("[Subscriber] Running");

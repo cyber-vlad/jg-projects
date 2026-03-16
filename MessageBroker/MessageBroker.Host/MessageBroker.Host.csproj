@@ -74,7 +74,7 @@
       <Name>MessageBroker.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\MessageBroker.Service\MessageBroker.Service.csproj">
-      <Project>{69eda3a0-1c20-463e-b5e7-d1a5fb8b45bf}</Project>
+      <Project>{ddc6ba17-ff0a-4bf8-8322-749f8a8691f5}</Project>
       <Name>MessageBroker.Service</Name>
     </ProjectReference>
   </ItemGroup>
