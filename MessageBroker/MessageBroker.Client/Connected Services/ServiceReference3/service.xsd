@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/MessageBroker.Common.Entities" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/MessageBroker.Common.Models" />
+  <xs:element name="GetTopicByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="topicName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTopicByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/MessageBroker.Common.Entities" minOccurs="0" name="GetTopicByNameResult" nillable="true" type="q1:Topic" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetExistingTopics">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetExistingTopicsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/MessageBroker.Common.Entities" minOccurs="0" name="GetExistingTopicsResult" nillable="true" type="q2:ArrayOfTopic" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Add">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/MessageBroker.Common.Entities" minOccurs="0" name="topic" nillable="true" type="q3:Topic" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/MessageBroker.Common.Models" minOccurs="0" name="AddResult" nillable="true" type="q4:BaseResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="topicName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/MessageBroker.Common.Models" minOccurs="0" name="DeleteByNameResult" nillable="true" type="q5:BaseResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

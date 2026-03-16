@@ -44,12 +44,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consts\BrokerConfig.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\IAuditableEntity.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Subscriber.cs" />
     <Compile Include="Entities\Subscription.cs" />
+    <Compile Include="Entities\Topic.cs" />
+    <Compile Include="Enums\StatusCode.cs" />
+    <Compile Include="Enums\TopicType.cs" />
     <Compile Include="Interfaces\IPublisher.cs" />
     <Compile Include="Interfaces\ISubscriber.cs" />
     <Compile Include="Interfaces\ISubscriptionRepository.cs" />
+    <Compile Include="Interfaces\ITopic.cs" />
+    <Compile Include="Interfaces\ITopicRepository.cs" />
+    <Compile Include="Models\BaseResponse.cs" />
     <Compile Include="Models\SubscriptionResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

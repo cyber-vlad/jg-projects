@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="338fee3f-4da3-4329-92cc-c03ef650c596" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:7003/topic/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="8ff25dbe-74a6-497f-ad1a-e859baf8bb87" SourceId="1" SourceUrl="http://localhost:7003/topic/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="527883c1-06de-408a-a4c2-e7a6fca32e7f" SourceId="1" SourceUrl="http://localhost:7003/topic/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="51b4be5b-b81c-49ff-9261-f14d95a49054" SourceId="1" SourceUrl="http://localhost:7003/topic/mex" />
+    <MetadataFile FileName="MessageBroker.Common.Entities.xsd" MetadataType="Schema" ID="ff3bc7ef-90dd-4cde-a5aa-ff2e40310fe9" SourceId="1" SourceUrl="http://localhost:7003/topic/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="39be6041-33a2-48ba-a7c2-ad88002682e3" SourceId="1" SourceUrl="http://localhost:7003/topic/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="f2afd71c-422c-436a-b797-569610f7a473" SourceId="1" SourceUrl="http://localhost:7003/topic/mex" />
+    <MetadataFile FileName="MessageBroker.Common.Enums.xsd" MetadataType="Schema" ID="d291b440-e4cc-4834-9491-25a153f243b4" SourceId="1" SourceUrl="http://localhost:7003/topic/mex" />
+    <MetadataFile FileName="MessageBroker.Common.Models.xsd" MetadataType="Schema" ID="e7369e42-e310-4b10-aa29-34cf1c1caf94" SourceId="1" SourceUrl="http://localhost:7003/topic/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
