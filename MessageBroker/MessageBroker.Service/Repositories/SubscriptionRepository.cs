@@ -11,7 +11,7 @@ namespace MessageBroker.Service.Repositories
 
         public void Add(Subscription subscription)
         {
-            if(!_subscriptions.Any(s => s.SubscriberId == subscription.SubscriberId && s.Topic == subscription.Topic))
+            if (!_subscriptions.Any(s => s.SubscriberId == subscription.SubscriberId && s.Topic == subscription.Topic))
                 _subscriptions.Add(subscription);
         }
 

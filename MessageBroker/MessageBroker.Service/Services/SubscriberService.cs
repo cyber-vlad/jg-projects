@@ -11,6 +11,8 @@ namespace MessageBroker.Service.Services
     public class SubscriberService : ISubscriber
     {
         private readonly ISubscriptionRepository _subscriptionRepository;
+        
+        public SubscriberService() { }
 
         public SubscriberService(ISubscriptionRepository subscriptionRepository)
         {

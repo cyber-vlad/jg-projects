@@ -11,10 +11,13 @@ namespace MessageBroker.Service.Services
     {
         private readonly ISubscriptionRepository _subscriptionRepository;
 
+        public PublisherService() { }
+
         public PublisherService(ISubscriptionRepository subscriptionRepository)
         {
             _subscriptionRepository = subscriptionRepository;
         }
+
 
         public void Publish(Message message)
         {
