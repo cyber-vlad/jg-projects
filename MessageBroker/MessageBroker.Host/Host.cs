@@ -12,6 +12,7 @@ namespace MessageBroker.Host
     {
         private ServiceHost _publisherHost;
         private ServiceHost _subscriberHost;
+        private ServiceHost _topicHost;
 
         private readonly IServiceProvider _serviceProvider;
 
@@ -24,12 +25,14 @@ namespace MessageBroker.Host
         {
             StartPublisher();
             StartSubscriber();
+            StartTopic();
         }
 
         public void Stop()
         {
             _publisherHost.Close();
             _subscriberHost.Close();
+            _topicHost.Close();
         }
 
         private void StartPublisher()
@@ -52,6 +55,17 @@ namespace MessageBroker.Host
             _subscriberHost.Open();
 
             Console.WriteLine("[Subscriber] Running");
+        }
+
+        private void StartTopic()
+        {
+            var service = _serviceProvider.GetRequiredService<TopicService>();
+
+            _topicHost = new ServiceHost(service);
+
+            _topicHost.Open();
+
+            Console.WriteLine("[Topic] Running");
         }
     }
 }

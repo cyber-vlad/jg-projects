@@ -49,8 +49,10 @@
     <Compile Include="MsmqConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\SubscriptionRepository.cs" />
+    <Compile Include="Repositories\TopicRepository.cs" />
     <Compile Include="Services\PublisherService.cs" />
     <Compile Include="Services\SubscriberService.cs" />
+    <Compile Include="Services\TopicService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

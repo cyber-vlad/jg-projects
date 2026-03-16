@@ -13,9 +13,11 @@ namespace MessageBroker.Host
             var services = new ServiceCollection();
 
             services.AddSingleton<ISubscriptionRepository, SubscriptionRepository>();
+            services.AddSingleton<ITopicRepository, TopicRepository>();
 
             services.AddSingleton<PublisherService>();
             services.AddSingleton<SubscriberService>();
+            services.AddSingleton<TopicService>();
 
             return services.BuildServiceProvider();
         }

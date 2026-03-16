@@ -1,7 +1,11 @@
 ﻿using MessageBroker.Client.ServiceReference1;
 using MessageBroker.Client.ServiceReference2;
+using MessageBroker.Client.ServiceReference3;
 using MessageBroker.Common.Entities;
+using MessageBroker.Common.Enums;
+using MessageBroker.Common.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Messaging;
 using System.Threading.Tasks;
 using Message = MessageBroker.Common.Entities.Message;
@@ -12,7 +16,7 @@ namespace MessageBroker.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(">> Enter type (publisher [p] / subscriber [s])");
+            Console.WriteLine(">> Enter type (publisher [p] / subscriber [s] / admin [a]");
             string type = Console.ReadLine();
             Console.Clear();
 
@@ -20,6 +24,7 @@ namespace MessageBroker.Client
             {
                 case "p": RunPublisher(); break;
                 case "s": RunSubscriber(); break;
+                case "a": RunAdmin(); break;
                 default: Console.WriteLine("Bye"); break;  
             }
         }
@@ -96,6 +101,53 @@ namespace MessageBroker.Client
             };
 
             queue.BeginReceive();
+        }
+
+        private static void RunAdmin()
+        {
+            var client = new TopicClient();
+
+            while(true)
+            {
+                Console.WriteLine("[1] Display all topis");
+                Console.WriteLine("[2] Display a topic");
+                Console.WriteLine("[3] Add a topic");
+                Console.WriteLine("[4] Delete a topic");
+
+                Console.Write(">> Enter an option: ");
+                string option = Console.ReadLine();
+
+                switch(option)
+                {
+                    case "1":
+                        var topics = client.GetExistingTopics();
+                        foreach(var t in topics)
+                            Console.WriteLine(t.Name);
+                        foreach(var t  in topics)
+                            t.Show();
+                        break;
+                    case "2":
+                        Console.Write(">> Enter name: ");
+                        var name = Console.ReadLine();
+                        client.GetTopicByName(name).Show();
+                        break;
+                    case "3":
+                        var response = client.Add(new Topic { Name = "jg", Type = TopicType.Business, QueuePaths = new List<string> { "queue3", "queue4" }, Descriptions = new List<string> { "J", "G" }, Tags = new Dictionary<string, string> { { "none", "dev" }, { "deputy", "teamB" } }, Metadata = new Tuple<int, string>(1, "J") });
+                        Console.WriteLine(response.Description);
+                        break;
+                    case "4":
+                        Console.Write(">> Enter name: ");
+                        var nameTopic = Console.ReadLine();
+                        var resp = client.DeleteByName(nameTopic);
+                        Console.WriteLine(resp.Description);
+                        break;
+
+                }
+            }
+
+            
+
+
         }
     }
 }
