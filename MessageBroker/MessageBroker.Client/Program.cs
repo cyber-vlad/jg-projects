@@ -82,21 +82,19 @@ namespace MessageBroker.Client
 
             queue.ReceiveCompleted += (sender, e) =>
             {
-                var q = (MessageQueue)sender;
-                q.BeginReceive();
                 try
                 {
-                    var msg = q.EndReceive(e.AsyncResult);
-                    var message = (Message)msg.Body;
+                    var q = (MessageQueue)sender;
+                    var result = queue.EndReceive(e.AsyncResult);
+                    var message = (Message)result.Body;
+
                     Console.WriteLine($"[Listening]: {message.Topic} | {message.Content}");
+
+                    q.BeginReceive();
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[Error][Listening] : {ex.Message}");
-                }
-                finally
-                {
-                    queue.BeginReceive();
+                    Console.WriteLine($"[Error][Listening]: {ex.Message}");
                 }
             };
 
@@ -144,10 +142,6 @@ namespace MessageBroker.Client
 
                 }
             }
-
-            
-
-
         }
     }
 }
