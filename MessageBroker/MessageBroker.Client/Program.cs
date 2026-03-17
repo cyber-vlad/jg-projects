@@ -1,9 +1,5 @@
-﻿using MessageBroker.Client.ServiceReference1;
-using MessageBroker.Client.ServiceReference2;
-using MessageBroker.Client.ServiceReference3;
-using MessageBroker.Common.Entities;
+﻿using MessageBroker.Common.Entities;
 using MessageBroker.Common.Enums;
-using MessageBroker.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Messaging;
@@ -56,7 +52,7 @@ namespace MessageBroker.Client
             Console.WriteLine(">> Enter ID: ");
             int subscriberId = int.Parse(Console.ReadLine());
 
-            var subscriberInfo = new Subscriber { Id = subscriberId };
+            Subscriber subscriberInfo = new Subscriber { Id = subscriberId };
             var subscriber = new SubscriberClient();
 
             Console.WriteLine(">> Enter topic: ");
@@ -121,13 +117,12 @@ namespace MessageBroker.Client
                         var topics = client.GetExistingTopics();
                         foreach(var t in topics)
                             Console.WriteLine(t.Name);
-                        foreach(var t  in topics)
-                            t.Show();
                         break;
                     case "2":
                         Console.Write(">> Enter name: ");
                         var name = Console.ReadLine();
-                        client.GetTopicByName(name).Show();
+                        var result = client.GetTopicByName(name);
+                        Console.WriteLine(result.Name);
                         break;
                     case "3":
                         var response = client.Add(new Topic { Name = "jg", Type = TopicType.Business, QueuePaths = new List<string> { "queue3", "queue4" }, Descriptions = new List<string> { "J", "G" }, Tags = new Dictionary<string, string> { { "none", "dev" }, { "deputy", "teamB" } }, Metadata = new Tuple<int, string>(1, "J") });
@@ -139,7 +134,6 @@ namespace MessageBroker.Client
                         var resp = client.DeleteByName(nameTopic);
                         Console.WriteLine(resp.Description);
                         break;
-
                 }
             }
         }

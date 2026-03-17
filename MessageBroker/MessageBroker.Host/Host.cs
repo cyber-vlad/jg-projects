@@ -1,10 +1,7 @@
-﻿using MessageBroker.Common.Consts;
-using MessageBroker.Common.Interfaces;
-using MessageBroker.Service.Services;
+﻿using MessageBroker.Service.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.ServiceModel;
-using System.ServiceModel.Description;
 
 namespace MessageBroker.Host
 {
