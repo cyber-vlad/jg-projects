@@ -18,7 +18,6 @@ namespace MessageBroker.Service.Services
             _subscriptionRepository = subscriptionRepository;
         }
 
-
         public void Publish(Message message)
         {
             var subscriptions = _subscriptionRepository.GetSubscriptionsByTopic(message.Topic);

@@ -36,7 +36,7 @@ namespace MessageBroker.Client
             {
                 Console.WriteLine(">> Enter message: ");
                 var content = Console.ReadLine();
-                
+
                 var message = new Message
                 {
                     Topic = topic,
@@ -44,6 +44,7 @@ namespace MessageBroker.Client
                 };
 
                 publisher.Publish(message);
+                Console.WriteLine("SENT");
             }
         }
 
@@ -52,7 +53,7 @@ namespace MessageBroker.Client
             Console.WriteLine(">> Enter ID: ");
             int subscriberId = int.Parse(Console.ReadLine());
 
-            Subscriber subscriberInfo = new Subscriber { Id = subscriberId };
+            var subscriberInfo = new Subscriber { Id = subscriberId };
             var subscriber = new SubscriberClient();
 
             Console.WriteLine(">> Enter topic: ");
@@ -61,7 +62,6 @@ namespace MessageBroker.Client
             var response = subscriber.Subscribe(subscriberInfo, topic);
 
             Task.Run(() => ListenMessages(response.QueuePath));
-
             Console.ReadLine();
         }
 
@@ -74,7 +74,7 @@ namespace MessageBroker.Client
             }
 
             var queue = new MessageQueue(queuePath);
-            queue.Formatter = new BinaryMessageFormatter();
+            queue.Formatter = new XmlMessageFormatter(new Type[] { typeof(Message) });
 
             queue.ReceiveCompleted += (sender, e) =>
             {

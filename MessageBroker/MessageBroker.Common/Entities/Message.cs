@@ -3,7 +3,6 @@ using System.Runtime.Serialization;
 
 namespace MessageBroker.Common.Entities
 {
-    [Serializable]
     [DataContract]
     public class Message
     {

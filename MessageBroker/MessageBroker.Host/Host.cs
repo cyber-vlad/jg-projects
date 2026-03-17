@@ -1,4 +1,5 @@
-﻿using MessageBroker.Service.Services;
+﻿using MessageBroker.Common.Interfaces;
+using MessageBroker.Service.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.ServiceModel;

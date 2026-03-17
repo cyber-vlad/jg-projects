@@ -12,8 +12,13 @@ namespace MessageBroker.Service.Infrastructure
 
             using (var queue = new MessageQueue(queuePath))
             {
-                queue.Formatter = new BinaryMessageFormatter();
-                queue.Send(message, MessageQueueTransactionType.None);
+                var msmqMessage = new System.Messaging.Message
+                {
+                    Body = message,
+                    Formatter = new XmlMessageFormatter(new Type[] { typeof(Common.Entities.Message) })
+                };
+
+                queue.Send(msmqMessage, MessageQueueTransactionType.None);
             }
         }
     }
