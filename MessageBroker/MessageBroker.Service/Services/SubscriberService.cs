@@ -34,11 +34,6 @@ namespace MessageBroker.Service.Services
 
             var queuePath = $@"{MsmqConfig.MsmqBasePath}{topic}_{subscriber.Id}";
 
-            if (!MessageQueue.Exists(queuePath))
-            {
-                MessageQueue.Create(queuePath, false);
-            }
-
             var subscription = new Subscription
             {
                 SubscriberId = subscriber.Id,

@@ -16,12 +16,14 @@ namespace MessageBroker.Client
             string type = Console.ReadLine();
             Console.Clear();
 
+            Console.WriteLine(">> Topics available");
+
             switch(type)
             {
                 case "p": RunPublisher(); break;
                 case "s": RunSubscriber(); break;
                 case "a": RunAdmin(); break;
-                default: Console.WriteLine("Bye"); break;  
+                default: Console.WriteLine("Bye"); return;  
             }
         }
 
@@ -67,12 +69,6 @@ namespace MessageBroker.Client
 
         private static void ListenMessages(string queuePath)
         {
-            if (!MessageQueue.Exists(queuePath))
-            {
-                Console.WriteLine("[Error] Queue does not exist");
-                return;
-            }
-
             var queue = new MessageQueue(queuePath);
             queue.Formatter = new XmlMessageFormatter(new Type[] { typeof(Message) });
 
@@ -125,7 +121,7 @@ namespace MessageBroker.Client
                         Console.WriteLine(result.Name);
                         break;
                     case "3":
-                        var response = client.Add(new Topic { Name = "jg", Type = TopicType.Business, QueuePaths = new List<string> { "queue3", "queue4" }, Descriptions = new List<string> { "J", "G" }, Tags = new Dictionary<string, string> { { "none", "dev" }, { "deputy", "teamB" } }, Metadata = new Tuple<int, string>(1, "J") });
+                        var response = client.Add(new Topic { Id = Guid.NewGuid(), Name = "jg", Type = TopicType.Business, QueuePaths = new List<string> { "queue3", "queue4" }, Descriptions = new List<string> { "J", "G" }, Tags = new Dictionary<string, string> { { "none", "dev" }, { "deputy", "teamB" } }, Metadata = new Tuple<int, string>(1, "J") });
                         Console.WriteLine(response.Description);
                         break;
                     case "4":
