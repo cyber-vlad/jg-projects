@@ -12,7 +12,7 @@ namespace MessageBroker.Service.Infrastructure
 
             using (var queue = new MessageQueue(queuePath))
             {
-                var msmqMessage = new System.Messaging.Message
+                var msmqMessage = new Message
                 {
                     Body = message,
                     Formatter = new XmlMessageFormatter(new Type[] { typeof(Common.Entities.Message) })

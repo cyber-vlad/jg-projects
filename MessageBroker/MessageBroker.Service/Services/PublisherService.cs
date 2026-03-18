@@ -1,7 +1,6 @@
 ﻿using MessageBroker.Common.Entities;
 using MessageBroker.Common.Interfaces;
 using MessageBroker.Service.Infrastructure;
-using System;
 using System.ServiceModel;
 
 namespace MessageBroker.Service.Services
